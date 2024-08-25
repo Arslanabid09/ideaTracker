@@ -1,0 +1,59 @@
+import React, { useState } from 'react'
+import {useUser} from './context/context'
+import { Link } from 'react-router-dom';
+const Register = () => {
+    const user = useUser();
+    const [name,setName] = useState('')
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+  return (
+    <section className='flex flex-col w-96 ml-[40rem] 
+    mt-32 items-center bg-gray-100 p-8 rounded-lg shadow-md'>
+    <h1 className='font-bold text-3xl mb-6 text-gray-800'>Register</h1>
+    <form className='flex flex-col  w-full max-w-md' 
+        onSubmit={async(e)=>{
+            e.preventDefault();
+        }}
+    >
+        <label htmlFor="userName" className='text-lg font-medium text-gray-700 mb-2'>Enter Your Name</label>
+        <input 
+            type="text" 
+            id="userName" 
+            placeholder='John Doe'
+            value={name} 
+            onChange={(e)=>setName(e.target.value)}
+            className='w-full p-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500'
+        />
+        <label htmlFor="userEmail" className='text-lg font-medium text-gray-700 mb-2'>Enter Your Email</label>
+        <input 
+            type="email" 
+            placeholder='example@example.com'
+            value={email} 
+            onChange={(e)=>setEmail(e.target.value)}
+            className='w-full p-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500'
+        />
+        <label htmlFor="userPassword" className='text-lg font-medium text-gray-700 mb-2'>Enter Your Password</label>
+        <input 
+            type="password" 
+            id="userPassword" 
+            placeholder='••••••••'
+            value={password} 
+            onChange={(e)=>setPassword(e.target.value)}
+            className='w-full p-2 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500'
+        />
+        <button 
+            type='submit'
+            onClick={()=>user.SignUp(name,email,password)}
+            className='w-full py-3 bg-yellow-500 text-white font-bold rounded-lg shadow-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500'
+        >
+            Register
+        </button>
+        
+        <p>Already have an account? <Link to="/" className='text-yellow-500'>Login</Link></p>
+    </form>
+</section>
+
+  )
+}
+
+export default Register
